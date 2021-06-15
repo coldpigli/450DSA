@@ -2,24 +2,43 @@
 using namespace std;
 
 
-int removeDuplicates(vector<int>& nums) {
-        
-        set<int, greater<int>> s1;
-        for(auto it: nums){
-            s1.insert(it);
-        }
+vector<vector<int>> triplets (vector<int> arr, int target_sum){
+
+	//assuming array returned will always be sorted
+	int n = arr.size();
+	vector<vector<int>> full_result;
+	for(int i=0; i<=n-3;i++)
+	{
+		int first = i+1;
+		int last  = n-1;
+		//two-pointer approach
+		while(first<last){
+			int currentsum = arr[i];
+			currentsum += arr[first];
+			currentsum += arr[last];
+
+			if(currentsum == target_sum){
+				full_result.push_back({arr[i],arr[first],arr[last]});
+				first++;
+				last++;
+			}
+			else if(currentsum>target_sum){
+				last--;
+			}
+			else{
+				first++;
+			}
+		}
+
+	}
+	return full_result;
+}
 
 
-        
-        nums.clear();
-        for(auto it: s1){
-        	
-            nums.push_back(it);
-        }
-        
-        return nums.size();
-        
-    }
+
+
+
+
 
 
 
@@ -34,10 +53,17 @@ int main()
 	#endif
 		
 	//**********************************************//
-		vector<int> arr = {1,1,2,3,4,4,5};
-		int k = removeDuplicates(arr);
-		cout<<k;
+		
 
+		vector<int> arr = {1,2,3,4,5,6,7,8,15};
+		int target = 18;
+		vector<vector<int>> result = triplets(arr, 18);
+		for(auto it: result){
+			for(auto it2: it){
+				cout<<it2<<" ";
+			}
+			cout<<endl;
+		}
 
 	//**********************************************//
 	return 0;
