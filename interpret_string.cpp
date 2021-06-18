@@ -1,13 +1,16 @@
 # include <bits/stdc++.h>
 using namespace std;
 
-	string interpret(string str){
+	
+        
+        string interpret(string str){
         
         string result;
         for(int i =0; i<str.size(); i++)
         {
             if(str[i]=='('&&str[i+1]==')'){
                 result.append("o");
+                i+=1;
             }
             else if(str[i]=='('&&str[i+1]=='a')
             {
@@ -16,7 +19,7 @@ using namespace std;
             }
             else
             {
-                result.append()
+                result.push_back(str[i]);
             }
         }
         return result;
